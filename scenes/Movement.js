@@ -15,7 +15,6 @@ class Movement extends Phaser.Scene {
 
         // Set up animations
         // Idle left
-        // Idle left
         this.anims.create({
             key: 'idle_left',
             frames: this.anims.generateFrameNames('link_atlas', {
@@ -27,6 +26,8 @@ class Movement extends Phaser.Scene {
             }),
             frameRate: 15,
             repeat: -1,
+            repeatDelay: 5000,
+            yoyo: true
         });
 
 
@@ -42,6 +43,8 @@ class Movement extends Phaser.Scene {
             }),
             frameRate: 15,
             repeat: -1,
+            repeatDelay: 5000,
+            yoyo: true
         });
 
 
