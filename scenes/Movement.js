@@ -15,16 +15,64 @@ class Movement extends Phaser.Scene {
 
         // Set up animations
         // Idle left
+        // Idle left
+        this.anims.create({
+            key: 'idle_left',
+            frames: this.anims.generateFrameNames('link_atlas', {
+                prefix: 'idle_left_',
+                start: 1,
+                end: 3,
+                suffix: '',
+                zeroPad: 4
+            }),
+            frameRate: 15,
+            repeat: -1,
+        });
 
 
         // Idle right
+        this.anims.create({
+            key: 'idle_right',
+            frames: this.anims.generateFrameNames('link_atlas', {
+                prefix: 'idle_right_',
+                start: 1,
+                end: 3,
+                suffix: '',
+                zeroPad: 4
+            }),
+            frameRate: 15,
+            repeat: -1,
+        });
 
 
         // Run left
+        this.anims.create({
+            key: 'run_left',
+            frames: this.anims.generateFrameNames('link_atlas', {
+                prefix: 'run_left_',
+                start: 1,
+                end: 10,
+                suffix: '',
+                zeroPad: 4
+            }),
+            frameRate: 30,
+            repeat: -1,
+        });
 
 
         // Run right
-
+        this.anims.create({
+            key: 'run_right',
+            frames: this.anims.generateFrameNames('link_atlas', {
+                prefix: 'run_right_',
+                start: 1,
+                end: 10,
+                suffix: '',
+                zeroPad: 4
+            }),
+            frameRate: 30,
+            repeat: -1,
+        });
 
 
         // make ground 🏞
