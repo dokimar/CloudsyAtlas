@@ -20,11 +20,11 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
-            gravity: {
-                x: 0,
-                y: 1000
-            }
+            debug: true//,
+            //gravity: {
+                //x: 0,
+                //y: 1000
+            //}
         }
     },
     scene: [ Load, Movement ]

@@ -47,6 +47,39 @@ class Movement extends Phaser.Scene {
             yoyo: true
         });
 
+        
+        // Idle up
+        this.anims.create({
+            key: 'idle_up',
+            frames: this.anims.generateFrameNames('link_atlas', {
+                prefix: 'idle_up_',
+                start: 1,
+                end: 1,
+                suffix: '',
+                zeroPad: 4
+            }),
+            frameRate: 15,
+            repeat: -1,
+            repeatDelay: 5000,
+            yoyo: true
+        });
+
+        // Idle down
+        this.anims.create({
+            key: 'idle_down',
+            frames: this.anims.generateFrameNames('link_atlas', {
+                prefix: 'idle_down_',
+                start: 1,
+                end: 3,
+                suffix: '',
+                zeroPad: 4
+            }),
+            frameRate: 15,
+            repeat: -1,
+            repeatDelay: 5000,
+            yoyo: true
+        });
+
 
         // Run left
         this.anims.create({
@@ -76,14 +109,42 @@ class Movement extends Phaser.Scene {
             frameRate: 30,
             repeat: -1,
         });
+        
+        // Run up
+        this.anims.create({
+            key: 'run_up',
+            frames: this.anims.generateFrameNames('link_atlas', {
+                prefix: 'run_up_',
+                start: 1,
+                end: 10,
+                suffix: '',
+                zeroPad: 4
+            }),
+            frameRate: 30,
+            repeat: -1,
+        });
+
+        // Run down
+        this.anims.create({
+            key: 'run_down',
+            frames: this.anims.generateFrameNames('link_atlas', {
+                prefix: 'run_down_',
+                start: 1,
+                end: 10,
+                suffix: '',
+                zeroPad: 4
+            }),
+            frameRate: 30,
+            repeat: -1,
+        });
 
 
         // make ground 🏞
-        this.ground = this.add.group();
-        this.groundSprite = this.physics.add.sprite(0, game.config.height - this.GROUND_HEIGHT, 'ground').setScale(2);
-        this.groundSprite.body.immovable = true;
-        this.groundSprite.body.allowGravity = false;
-        this.ground.add(this.groundSprite);
+        //this.ground = this.add.group();
+        //this.groundSprite = this.physics.add.sprite(0, game.config.height - this.GROUND_HEIGHT, 'ground').setScale(2);
+        //this.groundSprite.body.immovable = true;
+        //this.groundSprite.body.allowGravity = false;
+        //this.ground.add(this.groundSprite);
 
 
         // make player avatar 🧍
@@ -98,27 +159,41 @@ class Movement extends Phaser.Scene {
 
     update() {
         // check keyboard input
+        // left-right mvmt
         if(cursors.left.isDown) {
             this.player.body.setVelocityX(-this.VELOCITY);
             this.player.anims.play('run_left', true);
-
         } else if(cursors.right.isDown) {
             this.player.body.setVelocityX(this.VELOCITY);
             this.player.anims.play('run_right', true);
+        } else if (cursors.up.isDown) {
+            this.player.body.setVelocityY(-this.VELOCITY);
+            this.player.anims.play('run_up', true);
+        } else if(cursors.down.isDown) {
+            this.player.body.setVelocityY(this.VELOCITY);
+            this.player.anims.play('run_down', true);
+        
 
-        } else if (!cursors.right.isDown && !cursors.left.isDown) {
-            this.player.body.setVelocityX(0);
+
+        } else if (!cursors.right.isDown && !cursors.left.isDown && !cursors.down.isDown && !cursors.up.isDown) {
             // add code for idle animation play here:
             if (this.player.anims.isPlaying && this.player.anims.currentAnim.key === 'run_left') {
                 this.player.anims.play('idle_left');
            }
-           this.player.body.setVelocityX(0);
             if (this.player.anims.isPlaying && this.player.anims.currentAnim.key === 'run_right') {
                 this.player.anims.play('idle_right');
            }
+            if (this.player.anims.isPlaying && this.player.anims.currentAnim.key === 'run_up') {
+                this.player.anims.play('idle_up');
+           }
+            if (this.player.anims.isPlaying && this.player.anims.currentAnim.key === 'run_down') {
+                this.player.anims.play('idle_down');
+           }
            this.player.body.setVelocityX(0);
-            
+           this.player.body.setVelocityY(0);
+ 
         }
+
 
         // wrap physics object(s) .wrap(gameObject, padding)
         this.physics.world.wrap(this.player, 0);
