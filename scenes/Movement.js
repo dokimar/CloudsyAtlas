@@ -106,8 +106,14 @@ class Movement extends Phaser.Scene {
         } else if (!cursors.right.isDown && !cursors.left.isDown) {
             this.player.body.setVelocityX(0);
             // add code for idle animation play here:
-
-
+            if (this.player.anims.isPlaying && this.player.anims.currentAnim.key === 'run_left') {
+                this.player.anims.play('idle_left');
+           }
+           this.player.body.setVelocityX(0);
+            if (this.player.anims.isPlaying && this.player.anims.currentAnim.key === 'run_right') {
+                this.player.anims.play('idle_right');
+           }
+           this.player.body.setVelocityX(0);
             
         }
 
